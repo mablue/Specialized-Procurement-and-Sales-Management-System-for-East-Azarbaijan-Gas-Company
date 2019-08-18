@@ -14,7 +14,7 @@
 
 
 
-## How To:
+## چگونه ... ؟
 
 ### روش نصب و اجرا:
 
@@ -77,7 +77,7 @@ Procurement and Operations Management System of Internal Procurement Affairs of 
 
 <p>
 
-## How To:
+## How To ... ?
 
 ### Installation:
 
