@@ -1,0 +1,329 @@
+{% load i18n static %}
+<!DOCTYPE html>
+{% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
+<html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl" {% endif %}>
+
+<head>
+
+
+  <title> {% block title %}{% endblock %}</title>
+  <link rel="stylesheet" type="text/css" href="{% block stylesheet %}{% static "admin/css/base.css" %}{% endblock %}">
+  {% block extrastyle %}{% endblock %}
+  {% if LANGUAGE_BIDI %}
+  <link rel="stylesheet" type="text/css"
+    href="{% block stylesheet_rtl %}{% static "admin/css/rtl.css" %}{% endblock %}">{% endif %}
+  {% block extrahead %}{% endblock %}
+  {% block responsive %}
+  <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="{% static "admin/css/responsive.css" %}">
+  {% if LANGUAGE_BIDI %}
+  <link rel="stylesheet" type="text/css" href="{% static "admin/css/responsive_rtl.css" %}">{% endif %}
+  {% endblock %}
+  {% block blockbots %}
+  <meta name="robots" content="NONE,NOARCHIVE">{% endblock %}
+
+
+</head>
+
+{% load i18n %}
+
+<body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}"
+  data-admin-utc-offset="{% now "Z" %}">
+
+
+  <!-- Container -->
+  <div id="container">
+
+    {% if not is_popup %}
+    <!-- Header -->
+    <div id="header">
+      <div id="branding">
+        {% block branding %}{% endblock %}
+      </div>
+      {% block usertools %}
+      {% if has_permission %}
+      <div id="user-tools">
+        {% block welcome-msg %}
+        {% trans 'Welcome,' %}
+        <strong>{% firstof user.get_short_name user.get_username %}</strong>.
+        {% endblock %}
+        {% block userlinks %}
+        {% if site_url %}
+        <a href="{{ site_url }}">{% trans 'View site' %}</a> /
+        {% endif %}
+        {% if user.is_active and user.is_staff %}
+        {% url 'django-admindocs-docroot' as docsroot %}
+        {% if docsroot %}
+        <a href="{{ docsroot }}">{% trans 'Documentation' %}</a> /
+        {% endif %}
+        {% endif %}
+        {% if user.has_usable_password %}
+        <a href="{% url 'admin:password_change' %}">{% trans 'Change password' %}</a> /
+        {% endif %}
+        <a href="{% url 'admin:logout' %}">{% trans 'Log out' %}</a>
+        {% endblock %}
+      </div>
+      {% endif %}
+      {% endblock %}
+      {% block nav-global %}{% endblock %}
+    </div>
+    <!-- END Header -->
+    {% block breadcrumbs %}
+    <div class="breadcrumbs">
+      <a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+      {% if title %} &rsaquo; {{ title }}{% endif %}
+    </div>
+    {% endblock %}
+    {% endif %}
+
+    {% block messages %}
+    {% if messages %}
+    <ul class="messagelist">{% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message|capfirst }}</li>
+        {% endfor %}</ul>
+    {% endif %}
+    {% endblock messages %}
+
+    <!-- Content -->
+    <div id="content" class="{% block coltype %}colM{% endblock %}">
+      {% block pretitle %}{% endblock %}
+      {% block content_title %}{% if title %}<h1>{{ title }}</h1>{% endif %}{% endblock %}
+      {% block content %}
+      {% block object-tools %}{% endblock %}
+      {{ content }}
+      {% endblock %}
+      {% block sidebar %}{% endblock %}
+      <br class="clear">
+    </div>
+    <!-- END Content -->
+    <style>
+      /* #footer {
+        background: linear-gradient(#447e9b00, #447e9b90);
+      } */
+      /* .colMS {
+          margin-left: auto;
+          margin-right: auto;
+      } */
+      /* .dashboard #content {
+          width: 100%;
+      } */
+      /* td, th {
+        font-size: 24px;
+        line-height: 38px;
+      } */
+      /* .viewlink, .addlink, .changelink {
+          padding-left: 0;
+          padding-right: 40px;
+          background-position: 100% 1px;
+          background-size: contain;
+      }
+      .dashboard .module table td a {
+          padding-left: .6em;
+          padding-right: 40px;
+      } */
+    </style>
+
+    {% block footer %}<div id="footer">&#x637;&#x631;&#x627;&#x62D;&#x6CC; &#x648; &#x633;&#x627;&#x62E;&#x62A;:
+      &#x645;&#x633;&#x639;&#x648;&#x62F; &#x639;&#x632;&#x6CC;&#x632;&#x6CC; </div>{% endblock %}
+  </div>
+  <!-- END Container -->
+  <style>
+    button {
+      background-color: Transparent;
+      background-repeat: no-repeat;
+      border: none;
+      cursor: pointer;
+      overflow: hidden;
+      outline: none;
+      background: 00000000;
+      border: 00000000;
+      color: #666;
+    }
+
+    #changelist-filter ul {
+      display: none;
+    }
+
+    /*
+    #changelist-filter h3 {
+      font-size: 20px;
+    }
+     BODY,div.breadcrumbs,div.breadcrumbs a, #header, #header a:link,#header a:visited,#branding h1, #branding h1 a:link, #branding h1 a:visited{ */
+    /* background: rgb(255, 255, 218);      color: darkslategrey; */
+
+    /* } */
+    div .module {
+      /* padding: 10px 10px 20px 10px; */
+      /* border: 1px solid green; */
+      /* background-color: white; */
+      /* box-shadow: 0px 0px 5px lightgreen; */
+      text-shadow: 0px 0px 1px rgba(0, 0, 120, 0.3);
+
+    }
+
+    .change-list .filtered .results,
+    .change-list .filtered .paginator,
+    .filtered #toolbar,
+    .filtered div.xfull {
+      margin-right: 0;
+      margin-left: 239px;
+    }
+  </style>
+  {% comment %}
+  <script src="{% static "js/jquery2.min.js" %}"></script> {% endcomment %}
+  <script src="{% static "js/tree.js" %}"></script>
+
+
+
+  <link rel="stylesheet" href="{% static "css/persian-datepicker.min.css" %}" />
+  <script src="{% static "js/persian-date.min.js" %}"></script>
+  <script src="{% static "js/persian-datepicker.min.js" %}"></script>
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $(".vDateField").pDatepicker(
+        {
+
+          "inline": false,
+          "format": "L",
+          "viewMode": "day",
+          "initialValue": false,
+          "minDate": 1465350520173,
+          "maxDate": 2566300920180,
+          "autoClose": false,
+          "position": "auto",
+          "altFormat": "l",
+          "altField": "#altfieldExample",
+          "onlyTimePicker": false,
+          "onlySelectOnDate": true,
+          "calendarType": "persian",
+          "inputDelay": 800,
+          "observer": false,
+          "calendar": {
+            "persian": {
+              "locale": "en",
+              "showHint": false,
+              "leapYearMode": "algorithmic"
+            },
+            "gregorian": {
+              "locale": "en",
+              "showHint": false
+            }
+          },
+          "navigator": {
+            "enabled": true,
+            "scroll": {
+              "enabled": false
+            },
+            "text": {
+              "btnNextText": "<",
+              "btnPrevText": ">"
+            }
+          },
+          "toolbox": {
+            "enabled": true,
+            "calendarSwitch": {
+              "enabled": false,
+              "format": "MMMM"
+            },
+            "todayButton": {
+              "enabled": true,
+              "text": {
+                "fa": "امروز",
+                "en": "امروز"
+              }
+            },
+            "submitButton": {
+              "enabled": true,
+              "text": {
+                "fa": "تایید",
+                "en": "تایید"
+              }
+            },
+            "text": {
+              "btnToday": "امروز"
+            }
+          },
+          "timePicker": {
+            "enabled": false,
+            "step": 1,
+            "hour": {
+              "enabled": false,
+              "step": null
+            },
+            "minute": {
+              "enabled": false,
+              "step": null
+            },
+            "second": {
+              "enabled": false,
+              "step": null
+            },
+            "meridian": {
+              "enabled": false
+            }
+          },
+          "dayPicker": {
+            "enabled": true,
+            "titleFormat": "YYYY MMMM"
+          },
+          "monthPicker": {
+            "enabled": true,
+            "titleFormat": "YYYY"
+          },
+          "yearPicker": {
+            "enabled": true,
+            "titleFormat": "YYYY"
+          },
+          "responsive": false
+
+        }
+
+      );
+    });
+  </script>
+
+
+  <script>
+    $('#id_taghaza').on('change', function () {
+      var activeTaghaza = $('#id_taghaza').select2('data')[0].text;
+      var NotWanted = $('#id_aghlam').find("option:not(:contains('" + activeTaghaza + "'))");
+      NotWanted.prop('selected', false);
+      NotWanted.remove();
+
+    });
+
+
+    $('#id_aghlam').on('select2:opening', function () {
+
+      var activeTaghaza = $('#id_taghaza').select2('data')[0].text;
+      var NotWanted = $('#id_aghlam').find("option:not(:contains('" + activeTaghaza + "'))");
+      NotWanted.prop('selected', false);
+      NotWanted.remove();
+
+      var ao = $('#id_aghlam').find("option");
+      ao.prop('disabled', false);
+      var usedBefore = $('#id_aghlam').find("option:contains(' شماره فاکتور: ')");
+      // usedBefore.prop('disabled', true);
+      var usedHere = $('#id_aghlam').find("option:contains(' شماره فاکتور: " + $('#id_shomare').val() + "')");
+      usedHere.prop('disabled', false);
+
+    });
+
+
+    $('#id_aghlam').on('select2:select', function (evt) {
+      targetId = evt.params.data.id;
+      var targetUrl = "/aghlam/aghlam/" + targetId + "/change/?&_popup=1";
+      window.open(targetUrl, "popupWindow", "width=800,height=600,");
+    });
+    $("#recent-actions-module").hide();
+    $('#add_id_aghlam').hide();
+    $('.import_link').hide();
+    $('.export_link').html("<img title=\"خروجی اکسل\" style=\"display: block;\" width=\"20px\" src=\"{% static "excel.png" %}\"/>");
+  </script>
+
+
+</body>
+
+</html>

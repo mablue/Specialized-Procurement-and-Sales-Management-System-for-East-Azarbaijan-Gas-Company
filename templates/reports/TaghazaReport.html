@@ -1,0 +1,207 @@
+{% load i18n static %}
+<!DOCTYPE html> {% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
+<html lang="{{ LANGUAGE_CODE|default:" en-us " }}" {% if LANGUAGE_BIDI %}dir="rtl" {% endif %}>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static "admin/css/base.css" %}">
+    <script src="{% static "js/jquery2.min.js" %}"></script>
+    <meta name="viewport" content="width=device-width,maximum-scale=1.0">
+    <style>
+        @media print {
+
+            .no-print,
+            .no-print * {
+                display: none !important;
+            }
+
+            body {
+                scale: 70%;
+            }
+        }
+
+        /* table, tr {
+            border-collapse:collapse;
+
+        } */
+         td,th {
+            border: 2px solid #000;
+            vertical-align: top;
+
+        }
+
+        th {
+            text-align: right;
+        }
+        /* .taghazaTable,.taghazaTable th,.taghazaTable td {
+            border: 2px solid #000;
+            border-collapse: collapse;
+            width: 100%;
+            height: 100%;
+
+        } */
+
+        #ghalam_total {
+            text-align: center;
+            border: 1px solid #ddd;
+
+        }
+    </style>
+
+
+</head>
+
+<body style="font-family:Vazir;">
+
+    <center class="no-print">
+        گزارش مجموعه تقاضا ها
+        <button onclick="myFunction()">چاپ</button>
+    </center>
+    <table class="taghazaTable">
+        <thead>
+            <tr>
+                <th>ردیف</th>
+                <th>شماره تقاضا</th>
+                <th>واحد متقاضی</th>
+                <th>شرح تقاضا</th>
+                <th>مقدار</th>
+                <th>تاریخ تقاضا</th>
+                <!-- <th>اقلام مورد سفارش</th> -->
+                <th>فاکتور</th>
+                <th>مبلغ تقاضا</th>
+            </tr>
+            <thead>
+            <tbody>
+                {% for taghaza in taghazaha %}
+                <tr>
+                    <td> {{ taghaza.id }} </td>
+                    <td> {{ taghaza.shomare }} </td>
+                    <td> {{ taghaza.get_vahed_display }} </td>
+                    <td> {{ taghaza.sharh }} </td>
+                    <!-- <td> {{ taghaza.type }} </td> -->
+                    <td> {{ taghaza.count }} </td>
+                    <td> {{ taghaza.tarikh }} </td>
+                    <!-- <td> {{ taghaza.linkha }} </td> -->
+                    <!-- <td>
+                        <table>
+                            <tr>
+                                <td>نام</td>
+                                <td>مقدار</td>
+                                <td>کدطبقه بندی کالا</td>
+                            </tr>
+                            {% for ghalam in taghaza.aghlam_set.all %}
+                            <tr>
+                                <td>{{ ghalam.kala }}</td>
+                                <td class='tghalam_totals'>{{ ghalam.meghdar }}{{ ghalam.kala.vahede_andazegiri }}</td>
+                                <td>{{ghalam.kala.mesc}}</td>
+
+                            </tr>
+                            {% endfor %}
+
+                        </table>
+                    </td> -->
+                    <td>
+                        <table>
+                            <tr>
+                                <td>شماره فاکتور</td>
+                                <td>اقلام</td>
+                                <td>تاریخ</td>
+                                <td>ارزش افزوده</td>
+                                <td>مقدار</td>
+                                <td>مبلغ کل</td>
+                            </tr>
+                            {% for factor in taghaza.factor_set.all %}
+                            <tr>
+                                <td>{{ factor.shomare }}</td>
+                                <td>
+                                    <table>
+                                        <tr>
+                                            <td>نام</td>
+                                            <td>مقدار</td>
+                                            <td>فروشنده</td>
+                                            <td>مبلغ</td>
+                                            <td>مبلغ کل</td>
+                                        </tr>
+                                        {% for ghalam in factor.aghlam.all %}
+                                        <tr>
+                                            <td>{{ ghalam.kala }}</td>
+                                            <td class='ghalam_totals'>
+                                                {{ ghalam.meghdar }}{{ ghalam.kala.vahede_andazegiri }}</td>
+                                            <td>{{ ghalam.sherkat }}</td>
+                                            <td>{{ ghalam.mablagh }}</td>
+                                            <td>{{ ghalam.mablaghe_koll_splited }}</td>
+                                        </tr>
+                                        {% endfor %}
+
+                                    </table>
+                                </td>
+                                <td>{{ factor.tarikh }}</td>
+                                <td class="arzeshe_afzoode">{{ factor.arzeshe_afzude }}</td>
+                                <td>{{ factor.meghdar }}</td>
+                                <td>{{ factor.price }}</td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+
+                    </td>
+                    <td class="price_totals">{{ taghaza.price }}</td>
+
+                </tr>
+                {% endfor %}
+                <tr style="background-color-bak:#eeeeee">
+                    <td style="text-align:left" colspan="6">جمع:</td>
+                    <td id="ghalam_total"></td>
+                    <td id="price_total"></td>
+
+                </tr>
+            </tbody>
+
+        <tfoot>
+            <tr>
+                <td style="text-align:left;" colspan="8">طراحی و ساخت : مسعود عزیزی</td>
+            </tr>
+        </tfoot>
+    </table>
+    <script>
+        var sum = 0;
+        $('.price_totals').each(function () {
+            sum += parseFloat($(this).text()); // Or this.innerHTML, this.innerText
+        });
+        $('#price_total').text(sum);
+
+
+
+        var sum = 0;
+        $('.sefaresh_totals').each(function () {
+            sum += parseFloat($(this).text()); // Or this.innerHTML, this.innerText
+        });
+        $('#sefaresh_total').text(sum);
+
+
+        var sum = 0;
+        $('.ghalam_totals').each(function () {
+            sum += parseFloat($(this).text()); // Or this.innerHTML, this.innerText
+        });
+        $('#ghalam_total').text(sum);
+
+
+        function myFunction() {
+            window.print();
+        }
+
+
+        $.fn.digits = function () {
+            return this.each(function () {
+                $(this).text($(this).text().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+            })
+        }
+
+        $("td.price_totals").digits();
+        $("#price_total").digits();
+
+
+        $('.arzeshe_afzoode').find(':contains(True)').html('دارد');
+    </script>
+
+</body>
+
+</html>

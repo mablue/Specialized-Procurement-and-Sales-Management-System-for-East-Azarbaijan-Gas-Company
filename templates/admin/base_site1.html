@@ -1,0 +1,59 @@
+{% extends "admin/base.html" %}
+{% load static %}
+{% block title %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
+
+{% block branding %}
+{% comment %} <style>
+/* override styles when printing */
+@media print {
+
+
+    body djn-item .djn-module .djn-inline-form .inline-related .dynamic-form .grp-dynamic-form *
+    {
+        display: none;
+    }
+    djn-item .djn-module .djn-inline-form .has_original .inline-related .dynamic-form .grp-dynamic-form *
+    {
+        display: block;
+    }
+}
+input, select {
+  border: 1px solid black; /* 1px dashed black */;
+
+  color: #000;
+  background-color: #fff;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+
+  }
+
+input:hover, select:hover {
+  background-color: #2EE59D;
+  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+  color: #fff;
+
+}
+
+.module.aligned.djn-module {
+    display: inline-flex;
+}
+.module.aligned {
+    margin: 0px;
+}
+.required.inline, .vTextField {
+    width: auto;
+}
+.datetimeshortcuts{
+    display: none;
+} 
+</style>{% endcomment %}
+<h1 id="site-name"><img width="40px" src="{% static "gaz.gif" %}" /><a href="{% url 'admin:index' %}">{{ site_header|default:_('Django administration') }}</a></h1>
+{% endblock %}
+{% block nav-global %}{% endblock %}
+{% block footer %}
+
+<div id="footer">
+    &#x637;&#x631;&#x627;&#x62D;&#x6CC; &#x648; &#x633;&#x627;&#x62E;&#x62A;: &#x645;&#x633;&#x639;&#x648;&#x62F; &#x639;&#x632;&#x6CC;&#x632;&#x6CC;
+     </div>
+
+{% endblock %}

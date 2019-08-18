@@ -1,0 +1,44 @@
+
+{% block tableContent %}
+<tbody>
+{% comment %} Start of new taghaza {% endcomment %}
+{% for taghaza in taghazaha %}
+<tr>
+<td> {{ taghaza.id }} </td>
+<td> {{ taghaza.shomare }} </td>
+<td> {{ taghaza.get_vahed_display }} </td>
+<td> {{ taghaza.sharh }} </td>
+<td> {{ taghaza.count }} </td>
+<td> {{ taghaza.tarikh }} </td>
+
+
+    {% comment %} Start of new factor {% endcomment %}
+    {% for factor in taghaza.factor_set.all %}
+    <td> {{ factor. }} </td>
+    <td> {{ factor. }} </td>
+    <td> {{ factor. }} </td>
+    <td> {{ factor. }} </td>
+    <td> {{ factor. }} </td>
+    <td> {{ factor. }} </td>
+
+
+        {% comment %} Start of new ghalam {% endcomment %}
+
+        {% for ghalam in factor.aghlam_set.all %}
+        <td> {{ ghalam. }} </td>
+        <td> {{ ghalam. }} </td>
+        <td> {{ ghalam. }} </td>
+        <td> {{ ghalam. }} </td>
+        <td> {{ ghala0m. }} </td>
+        <td> {{ ghalam. }} </td>
+        <td> {{ ghalam. }} </td>
+        {% endfor %}
+
+
+    {% endfor %}
+
+
+</tr>
+{% endfor %}
+</tbody>
+{% endblock tableContent %}
