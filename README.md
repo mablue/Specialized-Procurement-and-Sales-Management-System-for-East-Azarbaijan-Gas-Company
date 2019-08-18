@@ -18,16 +18,16 @@
 
 ### روش نصب و اجرا:
 
-    1. فایل ها را با استفاده از دکمه سبز دانلود و از حالت فشرده خارج کنید
-    3.  [پایتون](https://www.python.org/) یا [آناکوندا](https://www.anaconda.com/) را دانلود و نصب کنید
-    4. خط فرمان را اجرا و دستورات زیر را در آن اجرا نمایید:
-        1. cd { جایی که فایل فشرده را استخراج کردید،برای مثال  : C:\Downloads\Chortke\ }
-        2. pip install -r requirments.txt
-        3. python manage.py makemigrations
-        4. python manage.py migrate
-        5. python manage.py createsuperuser
-        6. python manage.py runserver
-    5. لینک روبرو را در مرورگر خود اجرا نمایید : http://127.0.0.1:8000
+1. فایل ها را با استفاده از دکمه سبز دانلود و از حالت فشرده خارج کنید
+3.  [پایتون](https://www.python.org/) یا [آناکوندا](https://www.anaconda.com/) را دانلود و نصب کنید
+4. خط فرمان را اجرا و دستورات زیر را در آن اجرا نمایید:
+    1. cd { جایی که فایل فشرده را استخراج کردید،برای مثال  : C:\Downloads\Chortke\ }
+    2. pip install -r requirments.txt
+    3. python manage.py makemigrations
+    4. python manage.py migrate
+    5. python manage.py createsuperuser
+    6. python manage.py runserver
+5. لینک روبرو را در مرورگر خود اجرا نمایید : http://127.0.0.1:8000
    
 ## محیط برنامه:
 
@@ -79,16 +79,16 @@ Procurement and Operations Management System of Internal Procurement Affairs of 
 
 ### Installation:
 
-    1. Download and extract zip file
-    3. Download & install [python](https://www.python.org/) or [anaconda](https://www.anaconda.com/) softwere on your Computer
-    4. open cmd and run these commands:
-        1. cd { extracted files folder directory 4 ex: C:\Downloads\Chortke\ }
-        2. pip install -r requirments.txt
-        3. python manage.py makemigrations
-        4. python manage.py migrate
-        5. python manage.py createsuperuser
-        6. python manage.py runserver
-    5. open this link: http://127.0.0.1:8000
+1. Download and extract zip file
+3. Download & install [python](https://www.python.org/) or [anaconda](https://www.anaconda.com/)softwere on your Computer
+4. open cmd and run these commands:
+    1. cd { extracted files folder directory 4 ex: C:\Downloads\Chortke\ }
+    2. pip install -r requirments.txt
+    3. python manage.py makemigrations
+    4. python manage.py migrate
+    5. python manage.py createsuperuser
+    6. python manage.py runserver
+5. open this link: http://127.0.0.1:8000
    
 ## Screenshots:
 
