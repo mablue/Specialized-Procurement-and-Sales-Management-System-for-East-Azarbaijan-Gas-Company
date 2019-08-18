@@ -66,6 +66,7 @@
 
 </div>
 <div dir="ltr">
+
 ## Specialized Procurement and Sales Management System for East Azarbaijan Gas Company:
 
 based on: [Django Web Framework](https://www.djangoproject.com)
