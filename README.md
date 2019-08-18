@@ -58,7 +58,10 @@
    ایران، تبریز <br/>
    mablue92@gmail.com <br/>
    09149992598 <br/>
-   
+   <br/>
+   <br/>
+   <br/>
+   <br/>
 </p>
 
 
@@ -120,7 +123,10 @@ Procurement and Operations Management System of Internal Procurement Affairs of 
    Tabriz, Iran <br/>
    mablue92@gmail.com <br/>
    +989149992598 <br/>
-   
+   <br/>
+   <br/>
+   <br/>
+   <br/>
 </p>
 
 </div>
