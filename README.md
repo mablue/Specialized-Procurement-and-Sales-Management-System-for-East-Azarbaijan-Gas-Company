@@ -29,6 +29,7 @@
     5. python manage.py createsuperuser<br/>
     6. python manage.py runserver<br/>
 <p>
+
 5. لینک روبرو را در مرورگر خود اجرا نمایید : http://127.0.0.1:8000
    
 ## محیط برنامه:
