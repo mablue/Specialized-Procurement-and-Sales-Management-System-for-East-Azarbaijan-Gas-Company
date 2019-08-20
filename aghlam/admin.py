@@ -31,8 +31,8 @@ class AghlamAdmin(admin.ModelAdmin):
         'mablagh',
         'meghdar',
         'mablaghe_koll_splited',
-        'kala',
-        'sherkat',
+        # 'kala',
+        # 'sherkat',
     )
     list_totals = [
         ('mablagh', lambda field: Coalesce(Sum(field), 0)),

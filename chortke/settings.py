@@ -21,7 +21,7 @@ LANGUAGE_CODE = 'fa' # or en-nz? both don't work
 DATE_INPUT_FORMATS = ['%Y/%m/%d']
 DATETIME_INPUT_FORMATS = ['%Y/%m/%d %H:%M:%S', '%Y/%m/%d %H:%M:%S']
 
-fa_formats.DATE_FORMAT = 'Y/m/d'
+fa_formats.DATE_FORMAT = 'y/m/d'
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 

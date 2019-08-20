@@ -7,7 +7,7 @@ from taghaza.models import Taghaza
 
 class Tasfie(models.Model):
     taghaza = models.ForeignKey(Taghaza, on_delete=models.DO_NOTHING)
-    bank = models.CharField(max_length=500, verbose_name="نام بانک")
+    bank = models.CharField(max_length=500, verbose_name="نام بانک",default="ملت")
     shomare = models.CharField(max_length=500, verbose_name="شماره تسویه")
     tarikh = models.DateField(verbose_name="تاریخ تسویه")
     mablagh = models.IntegerField(verbose_name="مبلغ تسویه")

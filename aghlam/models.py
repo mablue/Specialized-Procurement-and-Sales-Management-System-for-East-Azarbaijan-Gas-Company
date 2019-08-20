@@ -13,7 +13,7 @@ class Aghlam(models.Model):
                                 verbose_name="تقاضا")
     # factor = models.ForeignKey(Factor, on_delete=models.CASCADE, verbose_name="فاکتور", null=True, blank=True, )
     kala = models.ForeignKey(Kala, on_delete=models.DO_NOTHING, verbose_name="نام کالا")
-    sherkat = models.ForeignKey(Sherkat, on_delete=models.DO_NOTHING, verbose_name="تامین کننده", null=True, blank=True, )
+    sherkat = models.ForeignKey(Sherkat, on_delete=models.DO_NOTHING, verbose_name="تامین کننده", null=True, blank=True,)
     mablagh = models.IntegerField(verbose_name="مبلغ واحد", null=True, blank=True, )
     meghdar = models.IntegerField(verbose_name="مقدار", null=True, blank=True,)
     external = models.BooleanField(verbose_name="خارجی", default=False)

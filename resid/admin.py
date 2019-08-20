@@ -10,20 +10,20 @@ from resid.models import Resid
 class ResidAdmin(admin.ModelAdmin):
     list_display = (
         'id',
-        'taghaza',
+        # 'taghaza',
         'shomare',
         'tarikh',
     )
     list_filter = (
         'id',
         'shomare',
-        'taghaza',
+        # 'taghaza',
         # 'tarikh',
         ('tarikh', DateRangeFilter),
     )
     search_fields = (
         'id',
-        'taghaza',
+        # 'taghaza',
         'tarikh',
     )
 

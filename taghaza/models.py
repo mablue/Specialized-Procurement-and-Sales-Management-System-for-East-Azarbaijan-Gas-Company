@@ -6,7 +6,7 @@ from django.utils.safestring import mark_safe
 class Taghaza(models.Model):
     vahedHa = [
         
-        (0, 'امور قراردادها و پیمانکاران'),
+        (0, 'امورقراردادهاوپیمانکاران'),
         (1, 'بهره‌برداری'),
         (2, 'امور رفاهی'),
         (3, 'اندازه‌گیری و توزیع گاز'),
@@ -14,11 +14,11 @@ class Taghaza(models.Model):
         (5, 'خدمات طرح‌ها'),
         (6, 'گازرسانی صنایع'),
         (7, 'فناوری اطلاعات'),
-        (8, 'امور تدارکات و عملیات کالا'),
-        (9, '(HSE) بهداشت، ایمنی و محیط زیست'),
+        (8, 'امورتدارکات وعملیات کالا'),
+        (9, 'HSE اچ اس ای'),
         (10, 'روابط عمومی'),
         (11, 'امور ورزشی'),
-        (0, 'سایر واحدهای ستادی'),
+        (12, 'سایر واحدهای ستادی'),
 
     ]
 
@@ -52,8 +52,7 @@ class Taghaza(models.Model):
         return str(self.shomare)  # + ": " + self.sharh
 
     def image_tag(self):
-        
-        return mark_safe(u'<style>#imgZoom{transition: transform .25s ease;border:1px solid orange;}#imgZoom:hover {transform:  rotate(90deg) scaleX(16) scaleY(25);position: absolute;z-index:1000;border:0.1px solid lightblue;}"</style><a target="_blank"  href="/%s"><img id="imgZoom" height="20px" width="20px" src="/%s" /></a>'% (self.image,self.image))
+        return mark_safe(u'<style>#imgZoom{transition: transform .25s ease;border:1px solid orange;}#imgZoom:hover {transform:rotate(90deg) scale(16,25);position: absolute;z-index:1000;border:0.1px solid lightblue;}"</style><a target="_blank"  href="/%s"><img id="imgZoom" height="20px" width="20px" src="/%s" /></a>'% (self.image,self.image))
 
     image_tag.short_description = 'تصویر'
     image_tag.allow_tags = True

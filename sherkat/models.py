@@ -8,8 +8,8 @@ from django.utils.safestring import mark_safe
 class Sherkat(models.Model):
     nam = models.CharField(max_length=500, verbose_name="نام شرکت")
     # image = models.ImageField(verbose_name="تصویر",upload_to="static/uploads/pic",null=True)
-    tel = models.IntegerField()
-    mob = models.IntegerField()
+    tel = models.IntegerField(verbose_name="شماره تلفن",blank=True,null=True,)
+    mob = models.IntegerField(verbose_name="شماره موبایل",blank=True,null=True,)
 
 
     def __str__(self):

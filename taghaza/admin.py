@@ -1,6 +1,6 @@
 import locale
 
-import nested_admin
+# import nested_admin
 from django.contrib import admin
 from django.shortcuts import render_to_response
 from django.urls import reverse
@@ -9,6 +9,8 @@ from rangefilter.filter import DateRangeFilter
 import re
 from aghlam.models import Aghlam
 from factor.models import Factor
+from resid.models import Resid
+from tasfie.models import Tasfie
 from salemali.models import Salemali
 from taghaza import views
 from taghaza.models import Taghaza
@@ -68,32 +70,51 @@ class TaghazaResource(resources.ModelResource):
         else:
             return "متوسط"
 
+class AghlamInline(admin.TabularInline):
+    extra = 0
 
-
-
-
-class AghlamInline(nested_admin.NestedStackedInline):
-    extra = 10
     model = Aghlam
     # sortable_field_name = "factor"
     fieldsets = (
         (None, {'fields': (
             'kala',
-            'taghaza',
+            # 'taghaza',
             'meghdar',
         )}),
     )
+class FactorInline(admin.TabularInline):
+    extra = 0
+    model = Factor
+    fieldsets = (
+        (None, {'fields': (('shomare','tarikh','arzeshe_afzude'),'image')}),
+    )
+    
+class ResidInline(admin.TabularInline):
+    extra = 0
+    model = Resid
+
+class TasfieInline(admin.TabularInline):
+    extra =0
+    model = Tasfie
 
 
-class TaghazaAdmin(nested_admin.NestedModelAdmin,ImportExportModelAdmin):
-    def get_actions(self, request):
-        actions = super().get_actions(request)
-        if request.user.username[0].upper() != 'J':
-            if 'delete_selected' in actions:
-                del actions['delete_selected']
-        return actions
+class TaghazaAdmin(ImportExportModelAdmin,admin.ModelAdmin,):
 
-    # your normal stuff
+    extra = 0
+    resource_class = TaghazaResource
+    inlines = [AghlamInline,FactorInline,ResidInline,TasfieInline]
+
+
+
+    # hide delete Action
+    # def get_actions(self, request):
+    #     actions = super().get_actions(request)
+    #     if request.user.username[0].upper() != 'J':
+    #         if 'delete_selected' in actions:
+    #             del actions['delete_selected']
+    #     return actions
+
+    # for Export As xls
     def get_export_formats(self):
         """
         Returns available export formats.
@@ -112,21 +133,31 @@ class TaghazaAdmin(nested_admin.NestedModelAdmin,ImportExportModelAdmin):
 
 
         
-    extra = 1
-    resource_class = TaghazaResource
-    inlines = [AghlamInline]
+
     fieldsets = (
-        (None, {
-            'fields': ((
-                           'shomare',
-                           'vahed',
-                           'sharh',
-                           'baravord',
-                           'tarikh',
-                           'image',
-                       ),)
+        # ('اطلاعات اصلی', {'fields':(tuple([]))}),
+        ('ورود اطلاعات تقاضا', {
+            'classes': ('wide', 'extrapretty'),
+
+            'fields': ( ( 'shomare', 'tarikh' ),( 'sharh','baravord' ),( 'vahed','image' ) )
         }),
+ 
+        ('بیشتر', {
+            'classes': ('collapse',),
+            'fields': (
+                'splited_price',
+                'image_tag',     
+                'type',
+                'count',  
+                'linkha',                           
+
+            ),
+        }),    
+        
+
+
     )
+
     # model = Taghaza
     # sortable_field_name = "position"
     actions = ['report']
@@ -142,12 +173,8 @@ class TaghazaAdmin(nested_admin.NestedModelAdmin,ImportExportModelAdmin):
         'tarikh',
         'baravord',
         'splited_price',
-
         'linkha',
-
         'image_tag',
-
-
     )
     readonly_fields = (
         'image_tag',

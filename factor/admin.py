@@ -43,7 +43,10 @@ class FactorAdmin(admin.ModelAdmin):
     #                 'arzeshe_afzude',
     #     )}),
     # )
+    fieldsets = (
+         (None, {'fields': (('taghaza','shomare','tarikh','arzeshe_afzude'),'aghlam',('image','image_tag'))}),
 
+    )
     list_display = (
         # 'id',
         'taghaza',
@@ -61,7 +64,7 @@ class FactorAdmin(admin.ModelAdmin):
     # parent_fields = Taghaza.get_deferred_fields(Factor)
 
     # list_display = all_fields
-    # read_only = parent_fields
+    readonly_fields = ('image_tag',)
     list_filter = (
         'id',
         'taghaza',

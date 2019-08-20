@@ -3,10 +3,11 @@ from taghaza.models import Taghaza
 from aghlam.models import Aghlam
 from django.utils.safestring import mark_safe
 
-
 class Factor(models.Model):
     taghaza = models.ForeignKey(Taghaza, on_delete=models.DO_NOTHING, verbose_name="تقاضا")
-    aghlam = models.ManyToManyField(Aghlam,)
+
+
+    aghlam = models.ManyToManyField(Aghlam, verbose_name="اقلام خریداری شده",)
     shomare = models.CharField(verbose_name="شماره فاکتور", null=True, max_length=500, unique=True )
     tarikh = models.DateField(auto_now=False, auto_now_add=False, verbose_name="تاریخ فاکتور",)
     arzeshe_afzude = models.BooleanField(default=True, verbose_name="ارزش افزوده")
@@ -31,11 +32,7 @@ class Factor(models.Model):
     salemali.short_description = "سال مالی"
 
     def image_tag(self):
-        # import os
-        # for file in os.listdir("static/pics/factor/"+self.):
-        #     if file.endswith(".txt"):
-        #         imgs= os.path.join("/mydir", file))
-        return mark_safe(u'<style>#imgZoom{transition: transform .25s ease;border:1px solid orange;}#imgZoom:hover {transform: scaleX(16) scaleY(25);position: absolute;z-index:1000;border:0.1px solid lightblue;}"</style><a target="_blank"  href="/%s"><img id="imgZoom" height="20px" width="20px" src="/%s" /></a>'% (self.image,self.image))
+        return mark_safe(u'<style>#imgZoom{transition: transform .25s ease;border:1px solid orange;}#imgZoom:hover {transform:  rotate(90deg) scaleX(16) scaleY(25);position: absolute;z-index:1000;border:0.1px solid lightblue;}"</style><a target="_blank"  href="/%s"><img id="imgZoom" height="20px" width="20px" src="/%s" /></a>'% (self.image,self.image))
 
     image_tag.short_description = 'تصویر'
     image_tag.allow_tags = True

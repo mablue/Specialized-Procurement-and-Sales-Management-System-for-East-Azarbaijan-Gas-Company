@@ -127,48 +127,7 @@
       &#x645;&#x633;&#x639;&#x648;&#x62F; &#x639;&#x632;&#x6CC;&#x632;&#x6CC; </div>{% endblock %}
   </div>
   <!-- END Container -->
-  <style>
-    button {
-      background-color: Transparent;
-      background-repeat: no-repeat;
-      border: none;
-      cursor: pointer;
-      overflow: hidden;
-      outline: none;
-      background: 00000000;
-      border: 00000000;
-      color: #666;
-    }
 
-    #changelist-filter ul {
-      display: none;
-    }
-
-    /*
-    #changelist-filter h3 {
-      font-size: 20px;
-    }
-     BODY,div.breadcrumbs,div.breadcrumbs a, #header, #header a:link,#header a:visited,#branding h1, #branding h1 a:link, #branding h1 a:visited{ */
-    /* background: rgb(255, 255, 218);      color: darkslategrey; */
-
-    /* } */
-    div .module {
-      /* padding: 10px 10px 20px 10px; */
-      /* border: 1px solid green; */
-      /* background-color: white; */
-      /* box-shadow: 0px 0px 5px lightgreen; */
-      text-shadow: 0px 0px 1px rgba(0, 0, 120, 0.3);
-
-    }
-
-    .change-list .filtered .results,
-    .change-list .filtered .paginator,
-    .filtered #toolbar,
-    .filtered div.xfull {
-      margin-right: 0;
-      margin-left: 239px;
-    }
-  </style>
   {% comment %}
   <script src="{% static "js/jquery2.min.js" %}"></script> {% endcomment %}
   <script src="{% static "js/tree.js" %}"></script>
@@ -182,24 +141,23 @@
 
   <script type="text/javascript">
     $(document).ready(function () {
-      $(".vDateField").pDatepicker(
-        {
 
+      var persian_date_picker_conf = {
           "inline": false,
           "format": "L",
           "viewMode": "day",
           "initialValue": false,
-          "minDate": 1465350520173,
-          "maxDate": 2566300920180,
+          "maxDate": new persianDate().add('year', 1).valueOf(),
+          "minDate": new persianDate().subtract('year', 3).valueOf(),
           "autoClose": false,
           "position": "auto",
-          "altFormat": "l",
-          "altField": "#altfieldExample",
+          "altFormat": "LLLL",
+          // "altField": ".vDateFieldAlt",
           "onlyTimePicker": false,
           "onlySelectOnDate": true,
           "calendarType": "persian",
-          "inputDelay": 800,
-          "observer": false,
+          "inputDelay": 0,
+          "observer": true,
           "calendar": {
             "persian": {
               "locale": "en",
@@ -266,11 +224,11 @@
           },
           "dayPicker": {
             "enabled": true,
-            "titleFormat": "YYYY MMMM"
+            "titleFormat": "YYYY/MMMM/DD"
           },
           "monthPicker": {
             "enabled": true,
-            "titleFormat": "YYYY"
+            "titleFormat": "YYYY/MMMM"
           },
           "yearPicker": {
             "enabled": true,
@@ -280,7 +238,15 @@
 
         }
 
-      );
+
+      // $('.calendarlink0').hide();
+      $('.datetimeshortcuts').hide();//.html("<input type=\"text\" class=\"vDateFieldAlt\" class=\"date-icon\" title=\"یک تاریخ انتخاب کنید\"></span>");
+      $( '.vDateField' ).each(function( index ) {
+        persian_date_picker_conf.altField = $(this).get(0).id;
+        $(this).pDatepicker(
+          persian_date_picker_conf
+        );
+      });
     });
   </script>
 
@@ -325,5 +291,52 @@
 
 
 </body>
+<style>
 
+    .select2-container .select2-selection--multiple .select2-selection__rendered {
+        white-space:normal;
+    }
+
+
+    input,.vIntegerField {
+      width: 20em;
+    }
+    select{
+      width:fit-content;
+      min-width: 20em;
+    }
+    input[type="checkbox"] {
+      width: 0px;
+    }
+    #id_tarikh__range__lte, #id_tarikh__range__gte, .controls > input:nth-child(1), .controls > input:nth-child(2) {
+      width: auto;
+    }
+
+    button {
+      background-color: Transparent;
+      background-repeat: no-repeat;
+      border: none;
+      cursor: pointer;
+      overflow: hidden;
+      outline: none;
+      background: 00000000;
+      border: 00000000;
+      color: #666;
+    }
+    #changelist-filter ul {
+      display: none;
+    }
+    div .module {
+      text-shadow: 0px 0px 1px rgba(0, 0, 120, 0.3);
+
+    }
+
+    .change-list .filtered .results,
+    .change-list .filtered .paginator,
+    .filtered #toolbar,
+    .filtered div.xfull {
+      margin-right: 0;
+      margin-left: 239px;
+    }
+  </style>
 </html>
