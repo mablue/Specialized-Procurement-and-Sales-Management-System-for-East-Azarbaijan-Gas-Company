@@ -71,7 +71,7 @@ class TaghazaResource(resources.ModelResource):
             return "متوسط"
 
 class AghlamInline(admin.TabularInline):
-    extra = 0
+    extra = 10
 
     model = Aghlam
     # sortable_field_name = "factor"
@@ -83,18 +83,18 @@ class AghlamInline(admin.TabularInline):
         )}),
     )
 class FactorInline(admin.TabularInline):
-    extra = 0
+    extra = 1
     model = Factor
     fieldsets = (
         (None, {'fields': (('shomare','tarikh','arzeshe_afzude'),'image')}),
     )
     
 class ResidInline(admin.TabularInline):
-    extra = 0
+    extra = 1
     model = Resid
 
 class TasfieInline(admin.TabularInline):
-    extra =0
+    extra = 1
     model = Tasfie
 
 

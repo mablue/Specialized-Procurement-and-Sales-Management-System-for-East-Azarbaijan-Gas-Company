@@ -252,6 +252,9 @@
 
 
   <script>
+    $('body').on('DOMNodeInserted', 'select', function () {
+      $(this).select2();
+    });
     $('#id_taghaza').on('change', function () {
       var activeTaghaza = $('#id_taghaza').select2('data')[0].text;
       var NotWanted = $('#id_aghlam').find("option:not(:contains('" + activeTaghaza + "'))");
@@ -259,7 +262,6 @@
       NotWanted.remove();
 
     });
-
 
     $('#id_aghlam').on('select2:opening', function () {
 
@@ -283,6 +285,9 @@
       var targetUrl = "/aghlam/aghlam/" + targetId + "/change/?&_popup=1";
       window.open(targetUrl, "popupWindow", "width=800,height=600,");
     });
+
+
+    
     $("#recent-actions-module").hide();
     $('#add_id_aghlam').hide();
     $('.import_link').hide();

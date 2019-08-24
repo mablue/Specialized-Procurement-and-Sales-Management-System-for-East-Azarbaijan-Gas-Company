@@ -8,7 +8,7 @@ class Factor(models.Model):
 
 
     aghlam = models.ManyToManyField(Aghlam, verbose_name="اقلام خریداری شده",)
-    shomare = models.CharField(verbose_name="شماره فاکتور", null=True, max_length=500, unique=True )
+    shomare = models.CharField(verbose_name="شماره فاکتور", max_length=500, unique=True )
     tarikh = models.DateField(auto_now=False, auto_now_add=False, verbose_name="تاریخ فاکتور",)
     arzeshe_afzude = models.BooleanField(default=True, verbose_name="ارزش افزوده")
     

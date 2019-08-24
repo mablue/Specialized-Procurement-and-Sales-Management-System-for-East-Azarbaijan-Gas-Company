@@ -13,7 +13,7 @@ class Kala(models.Model):
     # estefade = models.CharField(max_length=500, verbose_name="مورد استفاده",null=True,blank=True,)
     # jens = models.CharField(max_length=500, verbose_name="جنس",null=True,blank=True,)
     vahede_andazegiri = models.CharField(max_length=500, verbose_name="واحد کالا")
-    mesc = models.CharField(max_length=500, verbose_name="شماره طبقه بندی کالا (MESC)")
+    mesc = models.CharField(max_length=10, verbose_name="شماره طبقه بندی کالا (MESC)")
     class Meta:
         verbose_name = "کالا"
         verbose_name_plural = "کالا ها"

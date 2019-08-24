@@ -7,8 +7,8 @@ from taghaza.models import Taghaza
 
 class Resid(models.Model):
     taghaza = models.ForeignKey(Taghaza, on_delete=models.DO_NOTHING, verbose_name="تقاضا")
-    tarikh = models.DateField(verbose_name="تاریخ رسید",null=True)
-    shomare = models.CharField(verbose_name="شماره رسید",null=True,max_length=500,)
+    tarikh = models.DateField(verbose_name="تاریخ رسید")
+    shomare = models.CharField(verbose_name="شماره رسید",null=True,blank=True,max_length=500)
 
 
     def __str__(self):

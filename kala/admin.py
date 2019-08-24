@@ -6,6 +6,7 @@ from kala.models import Kala
 from aghlam.models import Aghlam
 class aghlamAdmin (admin.TabularInline):
     model = Aghlam
+    extra=0
     # inlines = [aghlamAdmin,]
 
 
