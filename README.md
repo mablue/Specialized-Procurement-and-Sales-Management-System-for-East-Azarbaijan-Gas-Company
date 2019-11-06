@@ -23,7 +23,7 @@
 4. خط فرمان را اجرا و دستورات زیر را در آن اجرا نمایید:
 <p dir="ltr">
     1. cd { جایی که فایل فشرده را استخراج کردید،برای مثال  : C:\Downloads\Chortke\ }<br/>
-    2. pip install -r requirments.txt<br/>
+    2. pip install -r requirements.txt<br/>
     3. python manage.py makemigrations<br/>
     4. python manage.py migrate<br/>
     5. python manage.py createsuperuser<br/>
@@ -90,7 +90,7 @@ Procurement and Operations Management System of Internal Procurement Affairs of 
 3. Download & install [python](https://www.python.org/) or [anaconda](https://www.anaconda.com/)softwere on your Computer
 4. open cmd and run these commands:
     1. cd { extracted files folder directory 4 ex: C:\Downloads\Chortke\ }
-    2. pip install -r requirments.txt
+    2. pip install -r requirements.txt
     3. python manage.py makemigrations
     4. python manage.py migrate
     5. python manage.py createsuperuser
