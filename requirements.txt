@@ -4,7 +4,7 @@ certifi==2019.6.16
 colorama==0.4.1
 defusedxml==0.6.0
 diff-match-patch==20181111
-Django==2.2.21
+Django==2.2.22
 django-admin-rangefilter==0.5.0
 django-admin-select2==1.0.1
 django-import-export==1.2.0
