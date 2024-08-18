@@ -1,6 +1,6 @@
 astroid==2.2.5
 backports.csv==1.0.7
-certifi==2022.12.7
+certifi==2024.7.4
 colorama==0.4.1
 defusedxml==0.6.0
 diff-match-patch==20181111
